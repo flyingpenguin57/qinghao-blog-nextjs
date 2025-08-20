@@ -1,4 +1,4 @@
-import ArticleList from './ui/components/ArticleList';
+import ArticleList from '@/app/ui/components/ArticleList';
 
 export default async function Page({
   searchParams,

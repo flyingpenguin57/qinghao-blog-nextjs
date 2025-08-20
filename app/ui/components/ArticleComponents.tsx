@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
-import { openSans } from '../fonts';
+import { openSans } from '@/app/ui/fonts';
 import Image from 'next/image';
 
 //layout components for articles

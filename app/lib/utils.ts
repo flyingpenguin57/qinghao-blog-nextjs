@@ -1,3 +1,5 @@
+import { Block, BlockType } from '@/app/lib/definition';
+
 export const parseCustomMarkup = (input: string): Block[] => {
   const regex = /<(T|S|ST|P|C|IMG)>([\s\S]*?);;;/g;
   const blocks: Block[] = [];

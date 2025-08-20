@@ -1,7 +1,7 @@
-import { fetchArticleById, increViewCount } from "../../lib/data";
-import { parseCustomMarkup } from '../../lib/utils';
-import { ArticleImage, MainTitle, Paragraph, SectionWrapper, SubTitle, Summary, Tag } from "../../ui/components/ArticleComponents";
-import CodeBlock from "../../ui/components/CodeBlock";
+import { fetchArticleById, increViewCount } from "@/app/lib/data";
+import { parseCustomMarkup } from '@/app/lib/utils';
+import { ArticleImage, MainTitle, Paragraph, SectionWrapper, SubTitle, Summary, Tag } from "@/app/ui/components/ArticleComponents";
+import CodeBlock from "@/app/ui/components/CodeBlock";
 
 interface ArticlePageProps {
   params: Promise<{ id: string }>

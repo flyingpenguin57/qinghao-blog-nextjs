@@ -1,4 +1,4 @@
-import { openSans } from "../ui/fonts";
+import { openSans } from "@/app/ui/fonts";
 
 export default function RootLayout({
     children,

@@ -2,12 +2,13 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import { AtSymbolIcon, CodeBracketIcon, LinkIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
-import { MainTitle, Summary, SubTitle, Paragraph, Tag, ArticleImage } from '../ui/components/ArticleComponents';
-import TagSelector from '../ui/components/TagSelector';
-import CodeBlock from '../ui/components/CodeBlock';
-import { parseCustomMarkup } from '../lib/utils';
-import { tags } from '../lib/constants';
+import { MainTitle, Summary, SubTitle, Paragraph, Tag, ArticleImage } from '@/app/ui/components/ArticleComponents';
+import TagSelector from '@/app/ui/components/TagSelector';
+import CodeBlock from '@/app/ui/components/CodeBlock';
+import { parseCustomMarkup } from '@/app/lib/utils';
+import { tags } from '@/app/lib/constants';
 import { useRouter } from 'next/navigation'
+import { Block } from '@/app/lib/definition';
 
 export default function Example() {
   const [text, setText] = useState(""); // 保存 textarea 的内容

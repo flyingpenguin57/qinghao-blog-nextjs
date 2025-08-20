@@ -1,5 +1,5 @@
 import { CodeBracketIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
-import { openSans } from "../fonts";
+import { openSans } from "@/app/ui/fonts";
 import { fetchPagedArticles } from "@/app/lib/data";
 import Pagination from '@/app/ui/components/Pagination';
 import Link from "next/link";

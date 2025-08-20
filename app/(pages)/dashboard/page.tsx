@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { fetchPagedArticles } from "../lib/data";
-import { openSans } from "../ui/fonts";
+import { fetchPagedArticles } from "@/app/lib/data";
+import { openSans } from "@/app/ui/fonts";
 
 export default async function Page() {
 
