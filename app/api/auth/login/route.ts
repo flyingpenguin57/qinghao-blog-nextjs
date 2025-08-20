@@ -1,21 +1,10 @@
 import { NextResponse } from 'next/server'
 import { SignJWT } from 'jose'
-import bcrypt from "bcrypt";
 import { fetchUserByUsername } from '@/app/lib/data';
 import { ResponseUtil } from '@/app/lib/api';
+import { verifyPassword } from '@/app/lib/auth';
 
 export const runtime = 'nodejs'
-
-// 哈希密码
-export async function hashPassword(password: string): Promise<string> {
-    const saltRounds = 10; // 越大越安全，但也越慢
-    return await bcrypt.hash(password, saltRounds);
-}
-
-// 校验密码
-export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-    return await bcrypt.compare(password, hashedPassword);
-}
 
 //获取jwt token签名密钥
 function getSecretKey() {
