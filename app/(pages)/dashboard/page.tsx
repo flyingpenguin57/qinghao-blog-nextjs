@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { fetchPagedArticles } from "@/app/lib/data";
 import { openSans } from "@/app/ui/fonts";
+import ActionButton from "@/app/ui/components/ActionButton";
 
 export default async function Page() {
 
@@ -13,7 +14,7 @@ export default async function Page() {
                 md:grid-cols-3 
                 lg:grid-cols-4">
             {articles.map((article) => (
-                <article key={article.id} className="border-1 border-gray-100 rounded-lg px-1 py-1 flex max-w-xl flex-col items-start justify-between">
+                <article key={article.id} className="border-1 border-gray-100 bg-gray-100 rounded-lg px-1 py-1 flex max-w-xl flex-col items-start justify-between">
                     <div className="flex items-center gap-x-4 text-xs">
                         <time dateTime={article.created_at?.toDateString()} className="text-gray-500 dark:text-gray-400">
                             {article.created_at?.toDateString()}
@@ -28,7 +29,7 @@ export default async function Page() {
                         </span>
                     </div>
                     <div className="group relative">
-                        <h3 className={`${openSans.className} mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600 dark:text-white dark:group-hover:text-gray-300`}>
+                        <h3 className={`${openSans.className} mt-3 text-lg/6 font-semibold text-gray-700 group-hover:text-gray-600 dark:text-white dark:group-hover:text-gray-300`}>
                             <Link href={`/article/${article.id}`}>
                                 <span className="absolute inset-0" />
                                 {article.title}
@@ -36,26 +37,7 @@ export default async function Page() {
                         </h3>
                         <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600 dark:text-gray-400">{article.summary}</p>
                     </div>
-                    <div className="flex flex-row">
-                        <div>
-                            <button
-                                className="px-1 py-1 text-sm border-1 rounded-lg text-white border-white bg-blue-500 cursor-pointer">
-                                Edit
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="px-1 py-1 text-sm border-1 rounded-lg text-white border-white bg-green-600 cursor-pointer">
-                                Release
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                className="px-1 py-1 text-sm border-1 rounded-lg text-white border-white bg-red-400 cursor-pointer">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
+                    <ActionButton />
                 </article>
             ))}
         </div>
