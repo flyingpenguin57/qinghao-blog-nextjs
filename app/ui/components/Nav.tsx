@@ -6,6 +6,7 @@ import { Bars3Icon, HomeIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useEffect } from 'react'
+import Image from 'next/image';
 
 export default function Nav() {
 
@@ -47,9 +48,11 @@ export default function Nav() {
             <div className="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
               <div className="flex shrink-0 items-center">
                 <Link href="/">
-                  <img
+                  <Image
                     alt="logo"
                     src="/logo.png"
+                    width={48} // Assuming a width based on `h-12` utility class (12 * 4 = 48px)
+                    height={48} // Assuming a height based on `h-12` utility class (12 * 4 = 48px)
                     className="h-12 w-auto"
                   />
                 </Link>
@@ -94,9 +97,11 @@ export default function Nav() {
                 <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-500">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <img
+                  <Image
                     alt=""
-                    src={user?.avator}
+                    src={user?.avator || '/default-avatar.png'} // Provide a fallback if user?.avator is null or undefined
+                    width={32} // Assuming size-8 (8 * 4 = 32px)
+                    height={32} // Assuming size-8 (8 * 4 = 32px)
                     className="size-8 rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10"
                   />
                 </MenuButton>
@@ -157,9 +162,11 @@ export default function Nav() {
           <div className="relative border-t border-gray-200 pt-4 pb-3 dark:border-white/10">
             <div className={clsx(!user && "hidden", "mx-auto flex max-w-3xl items-center px-4 sm:px-6")}>
               <div className="shrink-0">
-                <img
+                <Image
                   alt=""
-                  src={user?.avator}
+                  src={user?.avator || '/default-avatar.png'} // Provide a fallback if user?.avator is null or undefined
+                  width={40} // Assuming size-10 (10 * 4 = 40px)
+                  height={40} // Assuming size-10 (10 * 4 = 40px)
                   className="size-10 rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10"
                 />
               </div>
