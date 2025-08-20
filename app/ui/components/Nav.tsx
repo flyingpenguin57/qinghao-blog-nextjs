@@ -99,7 +99,7 @@ export default function Nav() {
                   <span className="sr-only">Open user menu</span>
                   <Image
                     alt=""
-                    src={user?.avator || '/default-avatar.png'} // Provide a fallback if user?.avator is null or undefined
+                    src={user?.avator || '/logo.png'} // Provide a fallback if user?.avator is null or undefined
                     width={32} // Assuming size-8 (8 * 4 = 32px)
                     height={32} // Assuming size-8 (8 * 4 = 32px)
                     className="size-8 rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10"
@@ -164,7 +164,7 @@ export default function Nav() {
               <div className="shrink-0">
                 <Image
                   alt=""
-                  src={user?.avator || '/default-avatar.png'} // Provide a fallback if user?.avator is null or undefined
+                  src={user?.avator || '/logo.png'} // Provide a fallback if user?.avator is null or undefined
                   width={40} // Assuming size-10 (10 * 4 = 40px)
                   height={40} // Assuming size-10 (10 * 4 = 40px)
                   className="size-10 rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10"
