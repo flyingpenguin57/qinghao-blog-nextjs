@@ -11,16 +11,18 @@ import { useRouter } from 'next/navigation'
 import { Block } from '@/app/lib/definition';
 import { PictureUpload } from '@/app/ui/components/PictureUpload';
 import { Tooltip } from '@/app/ui/components/Tooltip'; // Import the new Tooltip component
+import { tree } from 'next/dist/build/templates/app-page';
 
 export default function Example() {
   const [text, setText] = useState(""); // 保存 textarea 的内容
 
   const router = useRouter()
 
-
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value); // 实时更新 state
   };
+
+  const [onSaving, setOnSaving] = useState<boolean>(false);
 
   const [blocks, setBlocks] = useState<Block[]>([]);
 
@@ -31,14 +33,16 @@ export default function Example() {
 
   const [tag, setTag] = useState(tags[0])
 
-  const saveArticle = async () => {
+  const saveArticle = async (status: number) => {
+    setOnSaving(true)
     const res = await fetch('api/article/save', {
-      method: 'POST',                      // ✅ POST 请求
+      method: 'POST',                      
       headers: {
-        'Content-Type': 'application/json', // 必须指定 JSON
+        'Content-Type': 'application/json', 
       },
-      body: JSON.stringify({ content: text, tags: [tag.name] }), // 请求体
+      body: JSON.stringify({ content: text, tags: [tag.name], status }), 
     })
+    setOnSaving(false)
 
     if (res.ok) {
       const body = await res.json();
@@ -53,7 +57,7 @@ export default function Example() {
   };
 
   return (
-    <div className='w-11/12 md:w-2/3 mx-auto mt-8'>
+    <div className='w-11/12 md:w-2/3 mx-auto mt-8 mb-24'>
       <div className='w-1/2 md:w-1/4 mb-4'>
         <TagSelector tag={tag} setTag={setTag} tags={tags} ></TagSelector>
       </div>
@@ -130,13 +134,23 @@ export default function Example() {
             </TabPanel>
           </TabPanels>
         </TabGroup>
-        <div className="mt-2 flex justify-end">
+        <div className="mt-2 flex gap-4 justify-end">
           <button
             type="button"
-            onClick={saveArticle}
-            className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+            disabled={onSaving}
+            onClick={()=>saveArticle(0)}
+            className="disabled:cursor-not-allowed inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
           >
-            Save
+            {onSaving? "Saving" : "Save as draft"}
+          </button>
+
+          <button
+            type="button"
+            disabled={onSaving}
+            onClick={()=>saveArticle(1)}
+            className="disabled:cursor-not-allowed inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+          >
+            {onSaving ? "Publishing" : "Publish"}
           </button>
         </div>
       </form>

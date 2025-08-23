@@ -9,24 +9,26 @@ function getSecretKey() {
 }
 
 export async function middleware(req: NextRequest) {
-    const { pathname } = req.nextUrl
 
-    if (pathname.startsWith('/edit') || pathname.startsWith('/usercenter')) {
-        const token = req.cookies.get('token')?.value
-        if (!token) return NextResponse.redirect(new URL('/login', req.url))
+    const token = req.cookies.get('token')?.value
+    if (!token) return NextResponse.redirect(new URL('/login', req.url))
 
-        try {
-            await jwtVerify(token, getSecretKey())
-            return NextResponse.next()
-        } catch {
-            return NextResponse.redirect(new URL('/login', req.url))
-        }
+    try {
+        const { payload } = await jwtVerify(token, getSecretKey())
+        const requestHeaders = new Headers(req.headers)
+        requestHeaders.set('x-user-info', JSON.stringify(payload))        
+        return NextResponse.next({
+            request: {
+                headers: requestHeaders
+            }
+        })    } catch {
+        return NextResponse.redirect(new URL('/login', req.url))
     }
-
-    return NextResponse.next()
 
 }
 
 export const config = {
-    matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+    matcher: [
+        '/api/article/save'
+    ],
 }
