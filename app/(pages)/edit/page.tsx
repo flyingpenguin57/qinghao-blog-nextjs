@@ -1,11 +1,11 @@
 import { fetchArticleById } from '@/app/lib/data';
 import EditClientPage from '../../ui/components/EditClientPage';
 
-interface EditPageServerProps {
+interface PageProps {
   searchParams?: { id?: string };
 }
 
-export default async function Page({ searchParams }: EditPageServerProps) {
+export default async function Page({ searchParams }: PageProps) {
   const id = searchParams?.id;
   let article = null;
 
