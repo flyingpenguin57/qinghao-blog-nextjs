@@ -6,11 +6,10 @@ import { ResponseUtil } from '@/app/lib/api';
 import { updateArticle } from '@/app/lib/data';
 
 export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } },
+  req: NextRequest
 ) {
 
-  const { id } = await params;
+  const id = req.nextUrl.searchParams.get('id');
 
   await updateArticle({
     id: Number(id),
