@@ -71,7 +71,7 @@ export function SubTitle({ text }: { text: string }) {
 export function ArticleImage({ width, height, src, alt }: { width: number, height: number, src: string; alt: string }) {
     return (
         <figure className="mt-4">
-            <Image width={width} height={height} src={src} alt={alt}
+            <Image width={width} height={height} src={src} alt={alt} style={{ width: `${width}px`, height: 'auto' }}
                 className="rounded-xl bg-gray-50 object-cover dark:bg-gray-800"
             ></Image>
         </figure>

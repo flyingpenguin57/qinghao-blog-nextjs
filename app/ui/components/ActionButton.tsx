@@ -1,13 +1,51 @@
 'use client'
 
-import { useState } from 'react'
 import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
+import { useRouter } from 'next/navigation'
 
-export default function ActionButton() {
-  const handlePublish = () => alert('Publish clicked')
-  const handleEdit = () => alert('Edit clicked')
-  const handleDelete = () => alert('Delete clicked')
+interface ActionButtonProps {
+  articleId: number
+}
+
+export default function ActionButton({articleId}: ActionButtonProps) {
+
+  const router = useRouter()
+
+  const hadleEdit = (id: number) => {
+    router.push(`/edit?id=${id}`)
+  }
+
+  const deleteById = async (id: number) => {
+    const res = await fetch(`/api/article/delete/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const body = await res.json();
+    if (body.success) {
+      alert("delete success")
+      router.push("/dashboard");
+    } else {
+      alert(body.message)
+    }
+  }
+
+  const publish = async (id: number) => {
+    const res = await fetch(`/api/article/publish/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const body = await res.json();
+    console.log(body)
+    if (body.success) {
+      alert("publish success")
+      router.push("/dashboard");
+    }
+  }
 
   return (
     <Menu as="div" className="relative w-full text-left flex justify-end">
@@ -20,7 +58,7 @@ export default function ActionButton() {
           <Menu.Item>
             {({ active }) => (
               <button
-                onClick={handlePublish}
+                onClick={()=>publish(articleId)}
                 className={clsx(
                   active ? 'bg-gray-100 dark:bg-gray-700' : '',
                   'w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300'
@@ -33,7 +71,7 @@ export default function ActionButton() {
           <Menu.Item>
             {({ active }) => (
               <button
-                onClick={handleEdit}
+                onClick={() => hadleEdit(articleId)}
                 className={clsx(
                   active ? 'bg-gray-100 dark:bg-gray-700' : '',
                   'w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300'
@@ -46,7 +84,7 @@ export default function ActionButton() {
           <Menu.Item>
             {({ active }) => (
               <button
-                onClick={handleDelete}
+                onClick={()=>deleteById(articleId)}
                 className={clsx(
                   active ? 'bg-gray-100 dark:bg-gray-700' : '',
                   'w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400'

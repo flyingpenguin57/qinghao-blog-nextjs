@@ -54,7 +54,7 @@ export const PictureUpload: React.FC<PictureUploadProps> = ({ onUploadComplete }
             setPreviewUrl(null);
             alert("Image uploaded successfully!");
         } catch (err) {
-            console.error("Error uploading image:", err);
+            alert("Error uploading image:" + err);
         } finally {
             setLoading(false);
         }

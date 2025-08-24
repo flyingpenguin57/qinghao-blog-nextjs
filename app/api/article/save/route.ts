@@ -3,18 +3,14 @@ import { saveArticle } from '@/app/lib/data';
 import { parseCustomMarkup } from '@/app/lib/utils';
 import { ResponseUtil } from '@/app/lib/api';
 import { bizErrors } from '@/app/lib/constants';
-
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+import { updateArticle } from '@/app/lib/data';
 
 export async function POST(req: NextRequest) {
-    //mock delay
-    await sleep(5000)
 
     //parse request
     const body = await req.json();
     const {
+        id, // Add id to the destructuring
         content,
         tags = [],
         status = 0, // 默认草稿
@@ -44,7 +40,12 @@ export async function POST(req: NextRequest) {
     const created_at = new Date();
     const updated_at = created_at;
 
-    const articleId = await saveArticle({ title, summary, content, author_id, created_at, updated_at, tags, status })
+    let articleId;
+    if (id) {
+        articleId = await updateArticle({ id, title, summary, content, updated_at, tags, status });
+    } else {
+        articleId = await saveArticle({ title, summary, content, author_id, created_at, updated_at, tags, status });
+    }
 
     return NextResponse.json(ResponseUtil.ok({ "articleId": articleId }));
 }

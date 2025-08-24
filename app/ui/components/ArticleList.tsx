@@ -1,6 +1,6 @@
 import { CodeBracketIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 import { openSans } from "@/app/ui/fonts";
-import { fetchPagedArticles } from "@/app/lib/data";
+import { fetchPublishedPagedArticles } from "@/app/lib/data";
 import Pagination from '@/app/ui/components/Pagination';
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ export default async function ArticleList({ page }: Props) {
   }
   const pageSize = 5;
 
-  const articles = await fetchPagedArticles(1, page, pageSize);
+  const articles = await fetchPublishedPagedArticles(1, page, pageSize);
 
 
   return (
