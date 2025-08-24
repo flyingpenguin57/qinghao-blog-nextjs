@@ -6,8 +6,7 @@ interface EditPageServerProps {
 }
 
 export default async function Page({ searchParams }: EditPageServerProps) {
-  const awaitedParams = await searchParams;
-  const id = awaitedParams?.id;
+  const id = searchParams?.id;
   let article = null;
 
   if (id) {
