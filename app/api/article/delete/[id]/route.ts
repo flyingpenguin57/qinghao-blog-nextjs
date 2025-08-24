@@ -3,8 +3,8 @@ import { deleteArticle } from '@/app/lib/data';
 import { ResponseUtil } from '@/app/lib/api';
 import { bizErrors } from '@/app/lib/constants';
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-    const { id } = params;
+export async function DELETE(req: NextRequest, context: { params: { id: string } }) {
+    const { id } = context.params;
 
     if (!id) {
         return NextResponse.json(ResponseUtil.fail(bizErrors.ARTICLE_ID_REQUIRED.message, bizErrors.ARTICLE_ID_REQUIRED.code))
