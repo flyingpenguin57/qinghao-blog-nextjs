@@ -84,7 +84,7 @@ export async function updateArticle(
     { id, title, summary, content, updated_at, tags, status }:
         { id: number, title?: string, summary?: string, content?: string, updated_at: Date, tags?: string[], status?: number }) {
     try {
-        const updates: { [key: string]: any } = {
+        const updates: Partial<Article> = {
             updated_at: updated_at,
         };
 

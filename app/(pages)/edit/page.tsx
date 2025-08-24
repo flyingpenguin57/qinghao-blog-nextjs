@@ -1,5 +1,5 @@
 import { fetchArticleById } from '@/app/lib/data';
-import EditClientPage from './EditClientPage';
+import EditClientPage from '../../ui/components/EditClientPage';
 
 interface EditPageServerProps {
   searchParams?: { id?: string };
